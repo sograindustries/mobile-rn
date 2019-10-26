@@ -1,0 +1,17 @@
+yarn run v1.16.0
+$ react-native start
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Running Metro Bundler on port 8081.                                         │
+│                                                                              │
+│  Keep Metro running while developing on any JS projects. Feel free to        │
+│  close this tab and run your own Metro instance if you prefer.               │
+│                                                                              │
+│  https://github.com/facebook/react-native                                    │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+Looking for JS files in
+   /Users/guilhermeguedes/Documents/dev/argosindustries/apps/packages/mobile 
+
+Loading dependency graph, done.

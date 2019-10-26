@@ -1,0 +1,443 @@
+yarn run v1.16.0
+$ react-native start /Users/guilhermeguedes/Desktop/sample.txt
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│  Running Metro Bundler on port 8081.                                         │
+│                                                                              │
+│  Keep Metro running while developing on any JS projects. Feel free to        │
+│  close this tab and run your own Metro instance if you prefer.               │
+│                                                                              │
+│  https://github.com/facebook/react-native                                    │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+Looking for JS files in
+   /Users/guilhermeguedes/Documents/dev/argosindustries/apps/packages/mobile 
+
+Loading dependency graph, done.
+ BUNDLE  [ios, dev] ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100.0% (1121/1121), done.
+
+ BUNDLE  [ios, dev] ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100.0% (1/1), done.
+
+ DELTA  [ios, dev] ./index.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100.0% (1/1), done.
+
+ INFO  Running application mobile ({
+    initialProps =     {
+    };
+    rootTag = 51;
+})
+ LOG  Running "mobile" with {"rootTag":51,"initialProps":{}}
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": undefined, "type": "ACTION_SCAN_START"}
+ LOG  HERE IN MID [Function _callee]
+ LOG  HERE IN MID [Function _callee3]
+ LOG  State update:  "on"
+ LOG  FOUND P??  {"advertising": {"isConnectable": 1, "kCBAdvDataTimestamp": 592709041.816335, "localName": "ARGOS_ECG", "serviceUUIDs": ["E4CC0001-2A2A-B481-E9A1-7185D4BC7DB6"]}, "id": "78267F00-96F4-869E-06B5-DB2F3AA7B3E4", "name": "ARGOS_ECG", "rssi": -64}
+ LOG  STOP SCAN!
+ LOG  JSON:  [{"id":"78267F00-96F4-869E-06B5-DB2F3AA7B3E4","rssi":-64,"advertising":{"isConnectable":1,"localName":"ARGOS_ECG","serviceUUIDs":["E4CC0001-2A2A-B481-E9A1-7185D4BC7DB6"],"kCBAdvDataTimestamp":592709041.816335},"name":"ARGOS_ECG"}]
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": {"peripherals": [[Object]]}, "type": "ACTION_SCAN_SUCCESS"}
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": undefined, "type": "ACTION_CONNECT_START"}
+ LOG  HERE IN MID [Function _callee2]
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": undefined, "type": "ACTION_CONNECT_SUCCESS"}
+ INFO  Message to write(4): (
+    3,
+    0,
+    0,
+    0
+) 
+ INFO  Message to write(4): 03000000 
+ LOG  SENSOR:  -594
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -594, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -611
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -611, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -411
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -411, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -249
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -249, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -159
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -159, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -1093
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -1093, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  303
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 303, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1799
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1799, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -663
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -663, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -594
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -594, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -567
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -567, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -594
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -594, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -441
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -441, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -219
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -219, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -115
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -115, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  5434
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 5434, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  150
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 150, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1368
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1368, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  281
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 281, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -650
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -650, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -576
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -576, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -611
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -611, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -515
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -515, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -315
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -315, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  63
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 63, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2511
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2511, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  55
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 55, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  968
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 968, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1551
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1551, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -750
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -750, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -602
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -602, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -663
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -663, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -524
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -524, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -328
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -328, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -150
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -150, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  7609
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 7609, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  111
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 111, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1220
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1220, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  902
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 902, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -715
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -715, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -550
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -550, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -589
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -589, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -485
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -485, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -285
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -285, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -59
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -59, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  6443
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 6443, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  59
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 59, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  838
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 838, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1181
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1181, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -711
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -711, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -554
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -554, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -533
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -533, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -315
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -315, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  168
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 168, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -136
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -136, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -41
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -41, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  685
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 685, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2177
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2177, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -772
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -772, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -572
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -572, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -641
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -641, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -559
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -559, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -341
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -341, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -37
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -37, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2463
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2463, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -232
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -232, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  911
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 911, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1737
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1737, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -746
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -746, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -554
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -554, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -533
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -533, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -337
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -337, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  202
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 202, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -254
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -254, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -67
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -67, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  642
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 642, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2190
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2190, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -759
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -759, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -533
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -533, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -567
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -567, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -389
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -389, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  129
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 129, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -102
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -102, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -276
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -276, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  424
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 424, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2234
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2234, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -724
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -724, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -602
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -602, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -615
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -615, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -411
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -411, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  146
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 146, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -111
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -111, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -128
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -128, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  511
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 511, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2273
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2273, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -785
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -785, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -528
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -528, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -567
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -567, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -589
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -589, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -393
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -393, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -124
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -124, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -132
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -132, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -2572
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -2572, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  202
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 202, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1552
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1552, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -415
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -415, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -615
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -615, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -537
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -537, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -515
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -515, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -454
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -454, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -263
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -263, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  176
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 176, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  752
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 752, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -50
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -50, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  759
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 759, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1868
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1868, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -754
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -754, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -554
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -554, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -607
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -607, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -541
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -541, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -333
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -333, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1488
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1488, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -241
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -241, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  881
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 881, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1924
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1924, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -754
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -754, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -563
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -563, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -567
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -567, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -346
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -346, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  233
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 233, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -50
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -50, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -172
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -172, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  463
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 463, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2256
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2256, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -794
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -794, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -541
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -541, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -524
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -524, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -520
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -520, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -389
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -389, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -193
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -193, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  63
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 63, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  7002
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 7002, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  46
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 46, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  821
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 821, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1198
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1198, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -707
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -707, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -567
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -567, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -611
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -611, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -767
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -767, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -311
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -311, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  46
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 46, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1232
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1232, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  55
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 55, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  881
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 881, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1990
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1990, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -746
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -746, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -598
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -598, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -654
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -654, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -711
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -711, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -776
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -776, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -550
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -550, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -506
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -506, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -306
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -306, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -2521
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -2521, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  255
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 255, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  1781
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 1781, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -59
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -59, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -598
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -598, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -602
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -602, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -620
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -620, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -420
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -420, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  142
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 142, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -206
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -206, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -163
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -163, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  294
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 294, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2273
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2273, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -776
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -776, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -576
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -576, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -598
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -598, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -602
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -602, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -363
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -363, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  155
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 155, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -85
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -85, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -141
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -141, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  485
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 485, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  2282
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": 2282, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -754
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -754, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -615
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -615, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -763
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -763, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -559
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -559, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -141
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -141, "type": "ACTION_SET_ECG"}
+ LOG  SENSOR:  -363
+ LOG  HERE IN MID {"error": undefined, "meta": undefined, "payload": -363, "type": "ACTION_SET_ECG"}

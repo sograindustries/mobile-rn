@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "215513374627",
+    "firebase_url": "https://argos-mobile.firebaseio.com",
+    "project_id": "argos-mobile",
+    "storage_bucket": "argos-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215513374627:android:c3e06f032a47a786810416",
+        "android_client_info": {
+          "package_name": "com.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215513374627-ia4kk9plibn1504sculfjp2sioih8grt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZmj4pQ4AZm-SGvSCOF9DIJ3IUp_UPBK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215513374627-ia4kk9plibn1504sculfjp2sioih8grt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "215513374627-d01q223rs7hd4qkdjvus5rgsubpfisul.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
