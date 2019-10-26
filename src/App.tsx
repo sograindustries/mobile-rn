@@ -1,22 +1,25 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { ThemeProvider } from 'react-native-elements';
-import MainScreen2 from './components/MainScreen2';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from './store';
-import makePersistStateMiddleware from './middlewares/persistStateMiddleware';
-import { makeApi } from './api';
-import thunk from 'redux-thunk';
-import { Root } from 'native-base';
-import ProfileScreen from './components/ProfileScreen';
-import BleContainer from './ble/BleContainer';
-import { defaultService as defaultBleService } from './ble/service';
-import { makeStorage } from './ecg-storage';
+import React from "react";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+import { ThemeProvider } from "react-native-elements";
+import MainScreen2 from "./components/MainScreen2";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import { rootReducer } from "./store";
+import makePersistStateMiddleware from "./middlewares/persistStateMiddleware";
+import { makeApi } from "./api";
+import thunk from "redux-thunk";
+import { Root } from "native-base";
+import ProfileScreen from "./components/ProfileScreen";
+import BleContainer from "./ble/BleContainer";
+import { defaultService as defaultBleService } from "./ble/service";
+import { makeStorage } from "./ecg-storage";
+import { ApolloClient, HttpLink } from "apollo-client";
+import { ApolloProvider } from "@apollo/react-hooks";
+import { InMemoryCache } from "apollo-boost";
 
-export const SCREEN_KEY_PROFLIE = 'PROFILE';
-export const SCREEN_KEY_HOME = 'HOME';
+export const SCREEN_KEY_PROFLIE = "PROFILE";
+export const SCREEN_KEY_HOME = "HOME";
 
 const MainNavigator = createStackNavigator(
   {
@@ -27,7 +30,7 @@ const MainNavigator = createStackNavigator(
       screen: ProfileScreen
     }
   },
-  { headerMode: 'none' }
+  { headerMode: "none" }
 );
 
 const App = createAppContainer(MainNavigator);
@@ -40,14 +43,21 @@ const store = createStore(
 
 export const __store = store;
 
+const client = new ApolloClient({
+  link: new HttpLink(),
+  cache: new InMemoryCache()
+});
+
 const ProvidedApp = () => {
   return (
     <Root>
       <ThemeProvider>
-        <Provider store={store}>
-          <BleContainer />
-          <App />
-        </Provider>
+        <ApolloProvider client={client}>
+          <Provider store={store}>
+            <BleContainer />
+            <App />
+          </Provider>
+        </ApolloProvider>
       </ThemeProvider>
     </Root>
   );
@@ -72,7 +82,7 @@ defaultBleService.addOnValueListener(async value => {
       .map(k => values[k])
       .flat();
 
-    console.log('UPLOADING: ', data.length);
+    console.log("UPLOADING: ", data.length);
 
     globalBuffer = [];
     globalBufferSize = 0;
