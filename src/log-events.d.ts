@@ -1,6 +1,0 @@
-export declare const EVENT_SCAN_ERROR = "SCAN_ERROR";
-export declare const EVENT_SCAN_NULL_DEVICE = "SCAN_NULL_DEVICE";
-export declare const EVENT_SCAN_DEVICE_FOUND = "SCAN_DEVICE_FOUND";
-export declare const EVENT_CONNECT_ERROR = "CONNECT_ERROR";
-export declare const EVENT_DISCOVERED_CHARACTERISTICS = "DISCOVERED_CHARACTERISTICS";
-export declare const EVENT_LISTEN_ERROR = "LISTEN_ERROR";
