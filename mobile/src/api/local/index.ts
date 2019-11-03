@@ -8,6 +8,10 @@ function getState() {
 }
 
 function setState(state: AppState | null) {
+  if (!state) {
+    return AsyncStorage.removeItem(LOCAL_STORAGE_KEY_STATE);
+  }
+
   return AsyncStorage.setItem(LOCAL_STORAGE_KEY_STATE, JSON.stringify(state));
 }
 

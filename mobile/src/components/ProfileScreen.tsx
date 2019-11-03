@@ -1,6 +1,18 @@
 import React from 'react';
 import LoginScreen from './LoginScreen';
-import { Container, Content, Title, Text, View, Button } from 'native-base';
+import {
+  Container,
+  Content,
+  Title,
+  Text,
+  View,
+  Button,
+  ListItem,
+  Right,
+  Body,
+  Left,
+  Footer
+} from 'native-base';
 import AppHeader from './AppHeader';
 import { User } from '../store/session/types';
 import { connect } from 'react-redux';
@@ -24,23 +36,30 @@ const ProfileScreen = (props: Props) => {
     return <LoginScreen />;
   }
   return (
-    <Container>
+    <Container style={{ backgroundColor: '#ecebf2' }}>
       <AppHeader>
         <Title>Profile</Title>
       </AppHeader>
       <Content>
-        <View style={styles.fieldWrapper}>
-          <Text style={styles.fieldNameText}>Username</Text>
-          <Text style={styles.fieldValueText}>{props.user.username}</Text>
+        <View style={{ backgroundColor: '#FFFFFF' }}>
+          <ListItem icon>
+            <Body>
+              <Text>Username</Text>
+            </Body>
+            <Right>
+              <Text>{props.user.username}</Text>
+            </Right>
+          </ListItem>
         </View>
-        <Divider />
-        <View style={styles.fieldWrapper}>
-          <Button transparent onPress={props.onLogoutPress}>
-            <Text>Logout</Text>
-          </Button>
-        </View>
+
+        <Settings />
       </Content>
-      <Settings />
+
+      <Footer>
+        <Button transparent onPress={props.onLogoutPress} full>
+          <Text>Logout</Text>
+        </Button>
+      </Footer>
     </Container>
   );
 };
@@ -50,10 +69,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 15,
     flex: 1
-  },
-  fieldValueText: {
-    flex: 2,
-    color: COLOR_BLUE
   },
   fieldWrapper: {
     display: 'flex',

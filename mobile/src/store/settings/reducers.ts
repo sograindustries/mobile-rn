@@ -10,6 +10,16 @@ function developerMode(state: boolean = true, action: SettingsAction): boolean {
   }
 }
 
+function simulateFob(state: boolean = true, action: SettingsAction): boolean {
+  switch (action.type) {
+    case 'ACTION_SET_SIMULATE_FOB':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export const reducer = combineReducers({
-  developerMode
+  developerMode,
+  simulateFob
 });

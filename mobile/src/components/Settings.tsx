@@ -8,20 +8,24 @@ import {
   Text,
   Body,
   Right,
-  Switch
+  Switch,
+  View
 } from 'native-base';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
-import { setDeveloperMode } from '../store/settings/actions';
+import { setDeveloperMode, setSimulateFob } from '../store/settings/actions';
+import DeveloperOnly from './DeveloperOnly';
 
 interface Props {
   isDeveloperModeEnabled: boolean;
+  simulateFob: boolean;
   onDeveloperModeValueChange: (isEnabled: boolean) => void;
+  onSimulateFobValueChange: (isEnabled: boolean) => void;
 }
 
 function Settings(props: Props) {
   return (
-    <Content>
+    <View style={{ backgroundColor: '#FFFFFF', marginTop: 40 }}>
       <ListItem icon>
         <Left>
           <Button style={{ backgroundColor: '#FF9501' }}>
@@ -38,18 +42,41 @@ function Settings(props: Props) {
           />
         </Right>
       </ListItem>
-    </Content>
+
+      <DeveloperOnly>
+        <ListItem icon>
+          <Left>
+            <Button transparent>
+              <Icon active name="finger-print" />
+            </Button>
+          </Left>
+          <Body>
+            <Text>Simulate Fob</Text>
+          </Body>
+          <Right>
+            <Switch
+              value={props.simulateFob}
+              onValueChange={props.onSimulateFobValueChange}
+            />
+          </Right>
+        </ListItem>
+      </DeveloperOnly>
+    </View>
   );
 }
 
 export default connect(
   (state: AppState) => ({
-    isDeveloperModeEnabled: state.settings.developerMode
+    isDeveloperModeEnabled: state.settings.developerMode,
+    simulateFob: state.settings.simulateFob
   }),
   dispatch => {
     return {
       onDeveloperModeValueChange: (isEnabled: boolean) => {
         dispatch(setDeveloperMode(isEnabled));
+      },
+      onSimulateFobValueChange: (isEnabled: boolean) => {
+        dispatch(setSimulateFob(isEnabled));
       }
     };
   }

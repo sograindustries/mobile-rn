@@ -9,6 +9,7 @@ function makePersistStateMiddleware(api: Api): AppMiddleware {
       case 'ACTION_LOGIN_FAILED':
       case 'ACTION_LOGIN_SUCCESS':
       case 'ACTION_SET_DEVELOPER_MODE':
+      case 'ACTION_SET_SIMULATE_FOB':
         api.local.setState(store.getState());
         break;
       case 'ACTION_LOGOUT_SUCCESS':

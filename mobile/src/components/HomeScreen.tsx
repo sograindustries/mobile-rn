@@ -6,9 +6,7 @@ import {
   Right,
   View,
   Icon,
-  Button,
-  Footer,
-  FooterTab
+  Button
 } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { BleStatus } from '../store/ble/types';
@@ -18,6 +16,7 @@ import HeartChart from './HeartChart';
 import { COLOR_GREEN2 } from '../colors';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { SCREEN_KEY_PROFILE } from './AppNavigator';
+import AppFooter from './AppFooter';
 
 const styles = StyleSheet.create({
   nameText: {
@@ -33,11 +32,6 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent',
     borderBottomWidth: 0
-  },
-
-  footer: {
-    backgroundColor: 'transparent'
-    //  borderTopWidth: 0
   },
 
   helloMessageContainer: {
@@ -174,29 +168,6 @@ function StatusCards() {
   );
 }
 
-interface AppFooterProps {}
-
-function AppFooter(props: AppFooterProps) {
-  return (
-    <Footer style={styles.footer}>
-      <FooterTab>
-        <Button
-          vertical
-          style={{
-            backgroundColor: 'rgba(94, 213, 185, 0.2)'
-          }}>
-          <Icon name="home" />
-          <Text>Home</Text>
-        </Button>
-        <Button vertical>
-          <Icon name="person" style={{ opacity: 0.5 }} />
-          <Text style={{ opacity: 0.8 }}>Profile</Text>
-        </Button>
-      </FooterTab>
-    </Footer>
-  );
-}
-
 function HomeScreen() {
   return (
     <Container>
@@ -212,6 +183,7 @@ function HomeScreen() {
 
         <ReportButton />
       </View>
+      <AppFooter />
     </Container>
   );
 }
