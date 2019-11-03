@@ -212,8 +212,6 @@ function HomeScreen() {
 
         <ReportButton />
       </View>
-
-      <AppFooter />
     </Container>
   );
 }
