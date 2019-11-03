@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { View } from 'native-base';
-import { defaultService as bleService, scanAndConnect } from '../ble/service';
+import {
+  defaultService as bleService,
+  scanAndConnect,
+  setShouldSimulateFob
+} from '../ble/service';
 import { connect } from 'react-redux';
 import { logEvent } from '../logging';
 import {
@@ -10,6 +14,7 @@ import {
   connectSuccess,
   connectFailed
 } from '../store/ble/actions';
+import { AppState } from '../store';
 
 const LOG_KEY_BLE_CNOTAINER = 'ble_container';
 
@@ -26,7 +31,11 @@ function BleContainer(props: Props) {
 }
 
 export default connect(
-  undefined,
+  (state: AppState) => {
+    setShouldSimulateFob(state.settings.simulateFob);
+
+    return {};
+  },
   dispatch => {
     const onMount = async () => {
       scanAndConnect(bleService, {

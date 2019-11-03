@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import DeveloperOnly from './DeveloperOnly';
 import { COLOR_RED, COLOR_BLUE } from '../colors';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import { setLeftFingerState, setRightFingerState } from '../ble/service';
 
 const styles = StyleSheet.create({
   footer: {
@@ -49,10 +50,12 @@ function FobDebugControl() {
   const rightFobColor = isRightFobActive ? 'red' : COLOR_BLUE;
 
   const handleLeftFobPress = (value: boolean) => () => {
+    setLeftFingerState(value);
     setIsLeftFobActive(value);
   };
 
   const handleRightFobPress = (value: boolean) => () => {
+    setRightFingerState(value);
     setIsRightFobActive(value);
   };
 

@@ -99,7 +99,13 @@ function makeListenFn(manager: BleManager) {
           }
 
           Object.values(onValueListeners).forEach(cb => {
-            cb(deviceId, arr);
+            if (fob.shouldSimulateFob) {
+              if (fob.leftFingerActive && fob.rightFingerActive) {
+                cb(deviceId, arr);
+              }
+            } else {
+              cb(deviceId, arr);
+            }
           });
         }
       );
@@ -116,6 +122,23 @@ function makeListenFn(manager: BleManager) {
       logEvent('ble_service_listen', { message: `${error}` });
     }
   };
+}
+
+const fob = {
+  shouldSimulateFob: false,
+  leftFingerActive: false,
+  rightFingerActive: false
+};
+export function setShouldSimulateFob(value: boolean) {
+  fob.shouldSimulateFob = value;
+}
+
+export function setLeftFingerState(value: boolean) {
+  fob.leftFingerActive = value;
+}
+
+export function setRightFingerState(value: boolean) {
+  fob.rightFingerActive = value;
 }
 
 const onValueListeners: {
@@ -232,17 +255,17 @@ export function makeService(manager: BleManager) {
 
 type Service = ReturnType<typeof makeService>;
 
+export const defaultBleManager = new BleManager({
+  restoreStateIdentifier: 'ble-id',
+  restoreStateFunction: restoredState => {
+    logEvent('ble_restore_state_fn', {
+      connectedDevices: restoredState
+        ? restoredState.connectedPeripherals.join(',')
+        : 'n/a'
+    });
+  }
+});
+
 export const defaultService = makeService(
-  !process.env.JEST_WORKER_ID
-    ? new BleManager({
-        restoreStateIdentifier: 'ble-id',
-        restoreStateFunction: restoredState => {
-          logEvent('ble_restore_state_fn', {
-            connectedDevices: restoredState
-              ? restoredState.connectedPeripherals.join(',')
-              : 'n/a'
-          });
-        }
-      })
-    : ({} as any)
+  !process.env.JEST_WORKER_ID ? defaultBleManager : ({} as any)
 );
