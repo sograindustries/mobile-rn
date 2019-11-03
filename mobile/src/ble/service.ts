@@ -86,20 +86,20 @@ function makeListenFn(manager: BleManager) {
             return;
           }
 
-          const buf = new ArrayBuffer(60);
-          const arr = new Int16Array(buf);
+          const buf = new ArrayBuffer(120);
+          const arr = new Int32Array(buf);
           const value = Uint8Array.from(atob(char.value!), c =>
             c.charCodeAt(0)
           );
 
           const buffer = Buffer.Buffer.from(value); //https://github.com/feross/buffer#convert-arraybuffer-to-buffer
           for (let i = 0; i < 30; i += 1) {
-            const sensorData = buffer.readInt16LE(i * 2);
+            const sensorData = buffer.readInt32LE(i * 4);
             arr[i] = sensorData;
           }
 
           Object.values(onValueListeners).forEach(cb => {
-            cb(arr);
+            cb(deviceId, arr);
           });
         }
       );
@@ -118,8 +118,10 @@ function makeListenFn(manager: BleManager) {
   };
 }
 
-const onValueListeners: { [key: string]: (value: Int16Array) => void } = {};
-function addOnValueListener(cb: (value: Int16Array) => void) {
+const onValueListeners: {
+  [key: string]: (deviceId: string, value: Int32Array) => void;
+} = {};
+function addOnValueListener(cb: (deviceId: string, value: Int32Array) => void) {
   const id = Object.keys(onValueListeners).length;
   onValueListeners[id] = cb;
   return function remove() {

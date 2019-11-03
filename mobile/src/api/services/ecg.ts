@@ -7,7 +7,7 @@ var poolData = {
 
 export const makeEcgService = () => {
   return {
-    upload: (data: number[], sub: string, jwt: string) => {
+    upload: (data: number[], sub: string, jwt: string, patchUuid: string) => {
       return new Promise<string>(async (res, rej) => {
         await AWS.config.update({
           ...AWS.config,
@@ -29,7 +29,7 @@ export const makeEcgService = () => {
 
         var params = {
           Bucket: 'argos-ecgs',
-          Key: `${sub}/${new Date().getTime() / 1000}.json`,
+          Key: `${sub}/${patchUuid}/${new Date().toISOString()}.json`,
           Body: payload
         };
 
@@ -49,57 +49,6 @@ export const makeEcgService = () => {
             rej(new Error("Something wen't wrong uploading data to bucket."));
           }
         );
-
-        /*
-        s3.upload(params, (err: Error, data: AWS.S3.ManagedUpload.SendData) => {
-          if (err) {
-            console.log('ERROR: ', err);
-            rej(err);
-          }
-          if (data) {
-            console.log('DATA: ', data);
-            res(data.Location);
-          }
-
-          rej(new Error("Something wen't wrong uploading data to bucket."));
-        });
-        */
-        /*
-        s3.createBucket(
-          { Bucket: 'c10d09b1-3940-4a7b-98e1-a804ef813f68' },
-          (err, data) => {
-            if (err) {
-              console.log('ERROR: ', err);
-              rej(err);
-            }
-            if (data) {
-              console.log('DATA: ', data);
-              res(data.Location);
-              return;
-            }
-
-            rej(new Error("Something wen't wrong uploading data to bucket."));
-          }
-        );
-        */
-
-        /*
-        s3.upload(
-          uploadParams,
-          (err: Error, data: AWS.S3.ManagedUpload.SendData) => {
-            if (err) {
-              console.log('ERROR: ', err);
-              rej(err);
-            }
-            if (data) {
-              console.log('DATA: ', data);
-              res(data.Location);
-            }
-
-            rej(new Error("Something wen't wrong uploading data to bucket."));
-          }
-        );
-        */
       });
     }
   };

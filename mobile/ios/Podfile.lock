@@ -1,12 +1,12 @@
 PODS:
-  - appcenter (2.4.0):
+  - appcenter (2.5.0):
     - AppCenterReactNativeShared
     - React
-  - appcenter-analytics (2.4.0):
+  - appcenter-analytics (2.5.0):
     - AppCenter/Analytics
     - AppCenterReactNativeShared
     - React
-  - appcenter-crashes (2.4.0):
+  - appcenter-crashes (2.5.0):
     - AppCenter/Crashes
     - AppCenterReactNativeShared
     - React
@@ -266,12 +266,14 @@ PODS:
     - React-cxxreact (= 0.61.2)
     - React-jsi (= 0.61.2)
   - React-jsinspector (0.61.2)
-  - react-native-ble-manager (6.6.10):
+  - react-native-ble-manager (6.7.0):
     - React
   - react-native-ble-plx (1.1.0):
     - React
     - react-native-ble-plx-swift
   - react-native-ble-plx-swift (1.1.0)
+  - react-native-spinkit (1.4.1):
+    - React
   - React-RCTActionSheet (0.61.2):
     - React-Core/RCTActionSheetHeaders (= 0.61.2)
   - React-RCTAnimation (0.61.2):
@@ -307,23 +309,23 @@ PODS:
     - React-cxxreact (= 0.61.2)
     - React-jsi (= 0.61.2)
     - ReactCommon/jscallinvoker (= 0.61.2)
-  - ReactNativeART (1.0.1):
+  - ReactNativeART (1.0.2):
     - React
-  - RNAWSCognito (3.1.2):
+  - RNAWSCognito (3.1.3):
     - JKBigInteger2 (= 0.0.5)
     - React
   - RNCAsyncStorage (1.6.2):
     - React
-  - RNFBAnalytics (6.0.2):
+  - RNFBAnalytics (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - React
     - RNFBApp
-  - RNFBApp (6.0.2):
+  - RNFBApp (6.0.3):
     - Firebase/Core (~> 6.8.1)
     - React
   - RNGestureHandler (1.4.1):
     - React
-  - RNSVG (9.12.0):
+  - RNSVG (9.13.3):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -353,6 +355,7 @@ DEPENDENCIES:
   - react-native-ble-manager (from `../node_modules/react-native-ble-manager`)
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
   - react-native-ble-plx-swift (from `../node_modules/react-native-ble-plx`)
+  - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -433,6 +436,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ble-plx"
   react-native-ble-plx-swift:
     :path: "../node_modules/react-native-ble-plx"
+  react-native-spinkit:
+    :path: "../node_modules/react-native-spinkit"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -474,9 +479,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppCenter: 49a9ffe114c00e2bf5374aeda816d47eabf1978a
-  appcenter: 4072e79b8d037d99056e6fc6556224b4525b5829
-  appcenter-analytics: 94be52eca805d586207d710aac95e0ddca8b3ddb
-  appcenter-crashes: 30caece47856aee7c4c7449d4f4dae2d69795bd6
+  appcenter: bde9923b687332a25607fc1aa9577c9361cfed85
+  appcenter-analytics: 0ee7a35def715d4bce58ec435f54161770195166
+  appcenter-crashes: 9f9c5647dba19026ff09509576fb7233f69697ff
   AppCenterReactNativeShared: 57a66e6539e9abe6079ba8f93a002bc3f95788cc
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
@@ -505,9 +510,10 @@ SPEC CHECKSUMS:
   React-jsi: 32285a21b1b24c36060493ed3057a34677d58d09
   React-jsiexecutor: 8909917ff7d8f21a57e443a866fd8d4560e50c65
   React-jsinspector: 111d7d342b07a904c400592e02a2b958f1098b60
-  react-native-ble-manager: 94f58fab4e7e7761e88614eb16c65453d706767b
+  react-native-ble-manager: c61d563acabfc675d26ce55d3b6e2e84df950203
   react-native-ble-plx: 05e16667ebf56cf802986379fd58a377847885e8
   react-native-ble-plx-swift: e0d041529bd7ae66eb9731123eca3df3d132e8ec
+  react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   React-RCTActionSheet: 89b037c0fb7d2671607cb645760164e7e0c013f6
   React-RCTAnimation: e3cefa93c38c004c318f7ec04b883eb14b8b8235
   React-RCTBlob: d26ac0e313fbf14e7203473fd593ccaaeee8329e
@@ -518,13 +524,13 @@ SPEC CHECKSUMS:
   React-RCTText: e3ef6191cdb627855ff7fe8fa0c1e14094967fb8
   React-RCTVibration: fb54c732fd20405a76598e431aa2f8c2bf527de9
   ReactCommon: 5848032ed2f274fcb40f6b9ec24067787c42d479
-  ReactNativeART: d230fdaf9a6d15d5ec842355ada1edbe326c49d0
-  RNAWSCognito: 8debf630c0098266616f6815d0a163cdb927b2ad
+  ReactNativeART: 103929e284be663b5a2f921ed912821f04120a70
+  RNAWSCognito: 03b50ccc9dc30c1dc8d7c8446d1885d226be8ba2
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
-  RNFBAnalytics: e71cdfdd193cd0589a6ee89335ce6ed41df4fa04
-  RNFBApp: 32c782583cda2a9d53eac0ca154daf9f4e94f0fd
+  RNFBAnalytics: d75433ac464f0ac6e5bd1ae7015cb5fb6427e80a
+  RNFBApp: 92ae594c85e82e1e68434049b2a37e1f584cf8b9
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
-  RNSVG: 75670614bca635d3dd64bc267bc199e539cb4fa9
+  RNSVG: f6177f8d7c095fada7cfee2e4bb7388ba426064c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 14927e37bd25376d216b150ab2a561773d57911f
 

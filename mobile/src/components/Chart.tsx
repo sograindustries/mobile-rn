@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { COLOR_RED } from '../colors';
 import { defaultService as bleService } from '../ble/service';
+import mock from '../mock';
 
 interface Props {
   isConnected: boolean;
@@ -12,8 +13,14 @@ interface Props {
 const Chart = (_: Props) => {
   const [data, setData] = React.useState<number[]>([]);
 
+  /*
   React.useEffect(() => {
-    const removeListener = bleService.addOnValueListener(value => {
+    setData(mock.slice(0, 300 * 3));
+  }, []);
+  */
+
+  React.useEffect(() => {
+    const removeListener = bleService.addOnValueListener((_, value) => {
       setData(prevState => {
         return prevState
           .concat(Array.from(value))

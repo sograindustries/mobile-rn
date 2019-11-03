@@ -9,19 +9,51 @@ import { View, Text } from 'native-base';
 import { refresh } from '../store/session/actions';
 import { User } from '../store/session/types';
 import { firebase } from '@react-native-firebase/analytics';
+import { useQuery, useApolloClient } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 interface Props {
   authorize: () => Promise<void>;
 }
 
+const GET_VIEWER_QUERY = gql`
+  query GetViewer {
+    viewer {
+      username
+      id
+    }
+  }
+`;
+
 const MainScreen2 = (props: Props) => {
   const [isAuthorizing, setIsAuthorizing] = React.useState(true);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
   React.useEffect(() => {
-    props.authorize().finally(() => {
-      setIsAuthorizing(false);
-    });
+    props
+      .authorize()
+      .then(() => {
+        setIsAuthenticated(true);
+      })
+      .catch(() => {
+        setIsAuthenticated(false);
+      })
+      .finally(() => {
+        setIsAuthorizing(false);
+      });
   }, []);
+
+  /*
+  const client = useApolloClient();
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      client.query({ query: GET_VIEWER_QUERY }).then(res => {
+        console.log('RES:', res);
+      }); 
+    }
+  
+  }, [isAuthenticated]);
+  */
 
   if (isAuthorizing) {
     return (
@@ -33,10 +65,37 @@ const MainScreen2 = (props: Props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {isAuthenticated && <Viewer />}
       <MainGrid />
     </SafeAreaView>
   );
 };
+
+function Viewer() {
+  const { data, loading, error } = useQuery(GET_VIEWER_QUERY);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Fetching viewer...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View>
+        <Text>Error: {`${error}`}</Text>
+      </View>
+    );
+  }
+  console.log('DATA: ', data);
+  return (
+    <View>
+      <Text>Loading viewer...</Text>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -63,13 +122,13 @@ export default withApi(
             localState.session.user &&
             localState.session.user.refreshToken
           ) {
-            await firebase
-              .analytics()
-              .setUserId(localState.session.user!.username);
-
             ((await dispatch(
               refresh(localState.session.user!.refreshToken, ownProps.api)
             )) as unknown) as User;
+
+            await firebase
+              .analytics()
+              .setUserId(localState.session.user!.username);
           }
         }
       };

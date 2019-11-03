@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { logEvent } from './logging';
 
 const ASYNC_STORAGE_KEY_ECG = 'ASYNC_STORAGE_KEY_ECG';
 
@@ -8,7 +7,7 @@ function makeAddFn() {
     const item = JSON.stringify({ [new Date().getTime() / 1000]: payload });
     await AsyncStorage.mergeItem(ASYNC_STORAGE_KEY_ECG, item);
 
-    logEvent('sample_payload_add', {}, true /* localOnly */);
+    //  logEvent('sample_payload_add', {}, true /* localOnly */);
   };
 }
 
