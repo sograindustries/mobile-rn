@@ -48,9 +48,6 @@ const authLink = setContext((_, { headers }) => {
   }
 
   const user = store.getState().session.user;
-
-  console.log('Calling with USER: ', user);
-
   if (!user) {
     return headers;
   }
@@ -100,7 +97,12 @@ function App() {
       .catch(error => {})
       .finally(() => {
         setIsStoreLoaded(true);
-        SplashScreen.hide();
+
+        try {
+          SplashScreen.hide();
+        } catch (error) {
+          // Ignore error
+        }
       });
   });
   // Load local state

@@ -73,9 +73,19 @@ function status(
   }
 }
 
+function deviceId(state: string | null = null, action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_CONNECT_SUCCESS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export const reducer = combineReducers({
   status,
   peripherals,
   ecg,
-  ecgSet
+  ecgSet,
+  deviceId
 });

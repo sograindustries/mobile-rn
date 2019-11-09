@@ -50,6 +50,54 @@ function makeConnectFn(manager: BleManager) {
   };
 }
 
+function makeGetFWCommitHash(manager: BleManager) {
+  return function getFWCommitHash(deviceId: string) {
+    return new Promise<string | null>(async (res, rej) => {
+      const device = await manager.discoverAllServicesAndCharacteristicsForDevice(
+        deviceId
+      );
+
+      try {
+        const fwCommitHash = await device.readCharacteristicForService(
+          ARGOS_SERVICE_UUID,
+          'E4CC0004-2A2A-B481-E9A1-7185D4BC7DB6'.toLocaleLowerCase()
+        );
+
+        console.log('HASHHHH: ', atob(fwCommitHash.value || ''));
+
+        res(fwCommitHash.value ? atob(fwCommitHash.value) : null);
+      } catch (error) {
+        console.warn(error);
+        res(null);
+      }
+    });
+  };
+}
+
+function makeGetUptime(manager: BleManager) {
+  return function getFWCommitHash(deviceId: string) {
+    return new Promise<number | null>(async (res, rej) => {
+      const device = await manager.discoverAllServicesAndCharacteristicsForDevice(
+        deviceId
+      );
+
+      try {
+        const char = await device.readCharacteristicForService(
+          ARGOS_SERVICE_UUID,
+          'E4CC0002-2A2A-B481-E9A1-7185D4BC7DB6'.toLocaleLowerCase()
+        );
+
+        const value = Int32Array.from(atob(char.value!), c => c.charCodeAt(0));
+        const buffer = Buffer.Buffer.from(value);
+        res(buffer.readInt32LE(0));
+      } catch (error) {
+        console.warn(error);
+        res(null);
+      }
+    });
+  };
+}
+
 function makeListenFn(manager: BleManager) {
   return async function listen(deviceId: string) {
     try {
@@ -249,6 +297,8 @@ export function makeService(manager: BleManager) {
     scan: makeScanFn(manager),
     connect: makeConnectFn(manager),
     listen: makeListenFn(manager),
+    getFWCommitHash: makeGetFWCommitHash(manager),
+    getUptime: makeGetUptime(manager),
     addOnValueListener,
     __manager: manager
   };
@@ -270,3 +320,5 @@ export const defaultBleManager = new BleManager({
 export const defaultService = makeService(
   !process.env.JEST_WORKER_ID ? defaultBleManager : ({} as any)
 );
+
+export type BleService = ReturnType<typeof makeService>;

@@ -18,6 +18,7 @@ import Hello from './Hello';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import BleContainer from '../ble/BleContainer';
+import BleFWInfo from './BleFWInfo';
 
 const styles = StyleSheet.create({
   nameText: {
@@ -131,6 +132,7 @@ function HomeScreen() {
     <Container>
       <BleContainer />
       <AppHeader />
+      <BleFWInfo />
       <View style={{ flex: 1 }}>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
           <Hello />
