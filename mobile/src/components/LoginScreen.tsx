@@ -10,14 +10,18 @@ import {
   View,
   Text
 } from 'native-base';
-import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView
+} from 'react-native';
 import AppHeader from './AppHeader';
 import { COLOR_WHITE } from '../colors';
 import { connect } from 'react-redux';
 import { login } from '../store/session/actions';
 import { withApi, WithApiProps } from '../api/hoc';
 import { AppDispatch } from '../store';
-import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 
 type LoginErrorMessage = string;
 
@@ -41,43 +45,42 @@ function LoginScreen(props: Props) {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <AppHeader>
-          <Title>Login</Title>
-        </AppHeader>
+    <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
-          <Form>
-            <Item>
-              <Input
-                placeholder="Username"
-                onChangeText={setUsername}
-                value={username}
-              />
-            </Item>
-            <Item last>
-              <Input
-                placeholder="Password"
-                onChangeText={setPassword}
-                value={password}
-              />
-            </Item>
-          </Form>
-          {errorMessage ? (
-            <Text style={styles.errorText}>{errorMessage}</Text>
-          ) : null}
+          <View style={{ flex: 1 }}>
+            <Form>
+              <Item>
+                <Input
+                  placeholder="Username"
+                  onChangeText={setUsername}
+                  value={username}
+                />
+              </Item>
+              <Item last>
+                <Input
+                  placeholder="Password"
+                  onChangeText={setPassword}
+                  value={password}
+                />
+              </Item>
+            </Form>
+            {errorMessage ? (
+              <Text style={styles.errorText}>{errorMessage}</Text>
+            ) : null}
+          </View>
+          <Footer>
+            <FooterTab>
+              <Button primary onPress={handleLogin}>
+                <Text style={styles.loginBtnText}>Login</Text>
+              </Button>
+            </FooterTab>
+          </Footer>
         </View>
-        <Footer>
-          <FooterTab>
-            <Button primary onPress={handleLogin}>
-              <Text style={styles.loginBtnText}>Login</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -91,26 +94,21 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(
-  withApi(
-    connect(
-      undefined,
-      (
-        dispatch: AppDispatch,
-        ownProps: WithApiProps & NavigationInjectedProps
-      ) => {
-        return {
-          onLoginPress: async (username: string, password: string) => {
-            try {
-              await dispatch(login(username, password, ownProps.api));
-              //     ownProps.navigation.dispatch(resetAction);
-              return []; // no errors
-            } catch (error) {
-              return [error.code as LoginErrorMessage];
-            }
+export default withApi(
+  connect(
+    undefined,
+    (dispatch: AppDispatch, ownProps: WithApiProps) => {
+      return {
+        onLoginPress: async (username: string, password: string) => {
+          try {
+            await dispatch(login(username, password, ownProps.api));
+            //     ownProps.navigation.dispatch(resetAction);
+            return []; // no errors
+          } catch (error) {
+            return [error.code as LoginErrorMessage];
           }
-        };
-      }
-    )(LoginScreen)
-  )
+        }
+      };
+    }
+  )(LoginScreen)
 );

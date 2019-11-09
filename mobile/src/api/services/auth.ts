@@ -27,8 +27,6 @@ export const makeAuthService = () => {
 
         cognitoUser.authenticateUser(authenticationDetails, {
           onSuccess: function(result) {
-            console.log('RES: ', JSON.stringify(result.getIdToken()));
-
             res({
               jwt: result.getIdToken().getJwtToken(),
               refreshToken: result.getRefreshToken().getToken(),

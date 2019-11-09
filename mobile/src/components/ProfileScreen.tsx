@@ -9,17 +9,12 @@ import {
   Button,
   ListItem,
   Right,
-  Body,
-  Left,
-  Footer
+  Body
 } from 'native-base';
 import AppHeader from './AppHeader';
 import { User } from '../store/session/types';
 import { connect } from 'react-redux';
 import { AppState, AppDispatch } from '../store';
-import { Divider } from 'react-native-elements';
-import { StyleSheet } from 'react-native';
-import { COLOR_BLUE } from '../colors';
 import { logout } from '../store/session/actions';
 import { withApi, WithApiProps } from '../api/hoc';
 import Settings from './Settings';
@@ -55,28 +50,12 @@ const ProfileScreen = (props: Props) => {
         <Settings />
       </Content>
 
-      <Footer>
-        <Button transparent onPress={props.onLogoutPress} full>
-          <Text>Logout</Text>
-        </Button>
-      </Footer>
+      <Button transparent onPress={props.onLogoutPress} full>
+        <Text>Logout</Text>
+      </Button>
     </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  fieldNameText: {
-    fontWeight: 'bold',
-    paddingLeft: 15,
-    flex: 1
-  },
-  fieldWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 60
-  }
-});
 
 export default withApi(
   connect(

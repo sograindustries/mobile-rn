@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  id?: number;
   username: string;
   jwt: string | null;
   refreshToken: string | null;

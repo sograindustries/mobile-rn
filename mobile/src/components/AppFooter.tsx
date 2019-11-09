@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Text, Button, Footer, FooterTab, Icon, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 import DeveloperOnly from './DeveloperOnly';
-import { COLOR_RED, COLOR_BLUE } from '../colors';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { COLOR_BLUE } from '../colors';
 import { setLeftFingerState, setRightFingerState } from '../ble/service';
 
 const styles = StyleSheet.create({
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
 
 interface Props {}
 
-function AppFooter(props: Props) {
+function AppFooter(_: Props) {
   const [isFobVisible, setIsFobVisible] = React.useState(false);
 
   const handleOnFobPress = () => {

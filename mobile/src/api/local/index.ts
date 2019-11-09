@@ -3,8 +3,14 @@ import { AppState } from '../../store';
 
 const LOCAL_STORAGE_KEY_STATE = 'state';
 
-function getState() {
-  return AsyncStorage.getItem(LOCAL_STORAGE_KEY_STATE);
+async function getState(): Promise<AppState | null> {
+  const state = await AsyncStorage.getItem(LOCAL_STORAGE_KEY_STATE);
+
+  if (state) {
+    return JSON.parse(state);
+  }
+
+  return null;
 }
 
 function setState(state: AppState | null) {

@@ -70,7 +70,7 @@ function makeListenFn(manager: BleManager) {
       logEvent('chars_for_service_success', {});
 
       logEvent('monitor_chars_for_device_start', {});
-      const sub = manager.monitorCharacteristicForDevice(
+      manager.monitorCharacteristicForDevice(
         deviceId,
         ARGOS_SERVICE_UUID,
         'E4CC0020-2A2A-B481-E9A1-7185D4BC7DB6'.toLocaleLowerCase(),
@@ -93,7 +93,8 @@ function makeListenFn(manager: BleManager) {
           );
 
           const buffer = Buffer.Buffer.from(value); //https://github.com/feross/buffer#convert-arraybuffer-to-buffer
-          for (let i = 0; i < 30; i += 1) {
+
+          for (let i = 0; i < buffer.length / 4; i += 1) {
             const sensorData = buffer.readInt32LE(i * 4);
             arr[i] = sensorData;
           }

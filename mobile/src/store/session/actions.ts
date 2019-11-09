@@ -37,6 +37,7 @@ export function refresh(
       dispatch(loginSuccess(user));
       return user;
     } catch (error) {
+      dispatch(loginFailed(`${error}`));
       throw error;
     }
   };
@@ -49,6 +50,7 @@ export function login(
 ): AppThunk<Promise<User>, SessionAction> {
   return async dispatch => {
     try {
+      dispatch;
       const user = await api.auth.login(username, password);
       dispatch(loginSuccess(user));
       return user;

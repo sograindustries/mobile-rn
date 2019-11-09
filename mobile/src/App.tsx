@@ -1,87 +1,126 @@
 import * as React from 'react';
-import AppNavigator from './components/AppNavigator';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, Store } from 'redux';
-import { rootReducer, AppState, AppDispatch } from './store';
-import makePersistStateMiddleware from './middlewares/persistStateMiddleware';
+import { View, Text } from 'native-base';
+import { Store, createStore, applyMiddleware } from 'redux';
 import { makeApi } from './api';
+import { AppState, rootReducer, AppDispatch } from './store';
+import makePersistStateMiddleware from './middlewares/persistStateMiddleware';
 import thunk from 'redux-thunk';
-import BleContainer from './ble/BleContainer';
-import { View } from 'native-base';
+import { connect, Provider } from 'react-redux';
 import { refresh } from './store/session/actions';
-import { firebase } from '@react-native-firebase/analytics';
-import { User } from './store/session/types';
+import WelcomeScreen from './components/WelcomeScreen';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-client';
+import SplashScreen from 'react-native-splash-screen';
+import Viewer from './components/Viewer';
 
-const api = makeApi();
 let store: Store | null = null;
 
 function initializeStore(state?: AppState) {
-  store = createStore(
+  return createStore(
     rootReducer,
     state as any,
     applyMiddleware(makePersistStateMiddleware(api), thunk)
   );
 }
 
-async function authorize() {
-  if (!store) {
-    return;
-  }
+const api = makeApi();
 
-  const localState = JSON.parse(
-    (await api.local.getState()) || '{}'
-  ) as AppState;
-
-  if (
-    localState.session &&
-    localState.session.user &&
-    localState.session.user.refreshToken
-  ) {
-    ((await (store.dispatch as AppDispatch)(
-      refresh(localState.session.user!.refreshToken, api)
-    )) as unknown) as User;
-
-    await firebase.analytics().setUserId(localState.session.user!.username);
-  }
+async function init() {
+  const localState = await api.local.getState();
+  store = localState ? initializeStore(localState) : initializeStore();
+  return store;
 }
 
+const cache = new InMemoryCache();
+const httpLink = createHttpLink({
+  //uri: 'http://192.168.1.70:4000'
+  uri:
+    'https://9sqzy2t6ji.execute-api.us-east-1.amazonaws.com/production/graphql'
+
+  //'https://9sqzy2t6ji.execute-api.us-east-1.amazonaws.com/production/graphql'
+});
+const authLink = setContext((_, { headers }) => {
+  if (!store) {
+    return {};
+  }
+
+  const user = store.getState().session.user;
+
+  console.log('Calling with USER: ', user);
+
+  if (!user) {
+    return headers;
+  }
+
+  return {
+    headers: {
+      ...headers,
+      authorization: user.jwt
+    }
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache
+});
+
+interface InnerAppProps {
+  jwt: string | null;
+}
+
+function InnerApp(props: InnerAppProps) {
+  // Render login page if JWT not present.
+  if (!props.jwt) {
+    return <WelcomeScreen />;
+  }
+
+  return <Viewer />;
+}
+const HydratedApp = connect((state: AppState) => ({
+  jwt: state.session.user ? state.session.user.jwt : null
+}))(InnerApp);
+
 function App() {
-  const [loading, setLoading] = React.useState(true);
-
+  const [_, setIsStoreLoaded] = React.useState(false);
   React.useEffect(() => {
-    api.local
-      .getState()
-      .then(state => {
-        if (state) {
-          return JSON.parse(state);
+    init()
+      .then(async store => {
+        const state: AppState = store.getState();
+        const user = state.session.user;
+        if (user && user.refreshToken) {
+          await (store.dispatch as AppDispatch)(
+            refresh(user.refreshToken, api)
+          );
         }
-
-        return undefined;
       })
-      .then(initializeStore)
-      .catch((error: any) => {
-        console.warn(error);
-        initializeStore(undefined);
-      })
-      .finally(async () => {
-        try {
-          await authorize();
-        } catch (error) {
-          console.warn('Failed to authorize: ', error);
-        }
-
-        setLoading(false);
+      .catch(error => {})
+      .finally(() => {
+        setIsStoreLoaded(true);
+        SplashScreen.hide();
       });
-  }, []);
+  });
+  // Load local state
+  // Attempt Refresh token
+  // Fetch data from server if token is available
+  // Render UI
 
-  if (loading || !store) {
-    return <View />;
+  if (!store) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
   }
 
   return (
     <Provider store={store}>
-      <BleContainer />
-      <AppNavigator />
+      <ApolloProvider client={client}>
+        <HydratedApp />
+      </ApolloProvider>
     </Provider>
   );
 }

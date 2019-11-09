@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Icon, Text } from 'native-base';
 import { COLOR_DARK_GRAY } from '../colors';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
-import { SCREEN_KEY_PROFLIE } from '../App';
+import { SCREEN_KEY_PROFLIE } from '../App2';
 
 interface Props {
   onPress: () => void;

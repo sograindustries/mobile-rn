@@ -9,14 +9,15 @@ import {
   Button
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { BleStatus } from '../store/ble/types';
-import { connect } from 'react-redux';
-import { AppState } from '../store';
 import HeartChart from './HeartChart';
 import { COLOR_GREEN2 } from '../colors';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { SCREEN_KEY_PROFILE } from './AppNavigator';
 import AppFooter from './AppFooter';
+import Hello from './Hello';
+import { AppState } from '../store';
+import { connect } from 'react-redux';
+import BleContainer from '../ble/BleContainer';
 
 const styles = StyleSheet.create({
   nameText: {
@@ -29,11 +30,6 @@ const styles = StyleSheet.create({
     fontWeight: '400'
   },
 
-  header: {
-    backgroundColor: 'transparent',
-    borderBottomWidth: 0
-  },
-
   helloMessageContainer: {
     flex: 1,
     paddingLeft: 10
@@ -44,44 +40,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10
   }
 });
-
-interface HelloMessageProps {
-  status: BleStatus;
-}
-
-function HelloMessageInner(props: HelloMessageProps) {
-  let text = 'Disconnected';
-  let color = 'gray';
-
-  switch (props.status) {
-    case 'connected':
-      text = 'Your fob is ';
-      color = COLOR_GREEN2;
-      break;
-    case 'scanning':
-    case 'connecting':
-      text = 'Looking for your fob...';
-      break;
-  }
-
-  return (
-    <View style={styles.helloMessageContainer}>
-      <Text style={styles.nameText}>Hello Will,</Text>
-      <View style={{ display: 'flex', flexDirection: 'row' }}>
-        <Text style={styles.helloMessageSubtitle}>{text}</Text>
-        {props.status === 'connected' && (
-          <Text style={{ ...styles.helloMessageSubtitle, color }}>
-            connected
-          </Text>
-        )}
-        <Text style={styles.helloMessageSubtitle}>.</Text>
-      </View>
-    </View>
-  );
-}
-const HelloMessage = connect((state: AppState) => ({
-  status: state.ble.status
-}))(HelloMessageInner);
 
 function ReportButton() {
   return (
@@ -102,7 +60,7 @@ interface AppHeaderProps {
 
 function AppHeaderInner(props: AppHeaderProps) {
   return (
-    <Header style={styles.header}>
+    <Header style={styles.header} transparent>
       <Right>
         <Button onPress={props.onProfilePress} transparent>
           <Icon name="settings" style={{ fontSize: 32, color: COLOR_GREEN2 }} />
@@ -171,10 +129,11 @@ function StatusCards() {
 function HomeScreen() {
   return (
     <Container>
+      <BleContainer />
       <AppHeader />
       <View style={{ flex: 1 }}>
         <View style={{ display: 'flex', flexDirection: 'row' }}>
-          <HelloMessage />
+          <Hello />
         </View>
 
         <HeartChart />
@@ -188,4 +147,10 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default withNavigation(
+  connect((state: AppState) => {
+    return {
+      isLoggedIn: (state.session.user && state.session.user.jwt) !== null
+    };
+  })(HomeScreen)
+);

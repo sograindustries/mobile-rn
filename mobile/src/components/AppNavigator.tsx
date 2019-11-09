@@ -5,6 +5,7 @@ import ProfileScreen from './ProfileScreen';
 
 export const SCREEN_KEY_HOME = 'HOME';
 export const SCREEN_KEY_PROFILE = 'PROFILE';
+export const SCREEN_KEY_LOGIN = 'LOGIN';
 
 const AppNavigator = createStackNavigator(
   {

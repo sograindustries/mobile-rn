@@ -43,7 +43,7 @@ export const makeEcgService = () => {
 
             if (data) {
               console.log('DATA: ', data);
-              res(data.Location);
+              res(data.Key);
             }
 
             rej(new Error("Something wen't wrong uploading data to bucket."));

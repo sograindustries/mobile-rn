@@ -1,20 +1,18 @@
-import * as React from "react";
-import { StyleSheet } from "react-native";
-import { Content, Container, Card } from "native-base";
-import PatchConnectionButton from "./PatchConnectionButton";
-import ChartCard from "./ChartCard";
-import BatteryCard from "./BatteryCard";
-import ProfileCard from "./ProfileCard";
-import { COLOR_WHITE } from "../colors";
-import DeveloperCard from "./DeveloperCard";
-import ShareWithDoctorCard from "./ShareWithDoctorCard";
-import LogsCard from "./LogsCard";
-import PatchList from "./PatchList";
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { Content, Container, Card } from 'native-base';
+import PatchConnectionButton from './PatchConnectionButton';
+import ChartCard from './ChartCard';
+import BatteryCard from './BatteryCard';
+import ProfileCard from './ProfileCard';
+import { COLOR_WHITE } from '../colors';
+import DeveloperCard from './DeveloperCard';
+import ShareWithDoctorCard from './ShareWithDoctorCard';
+import LogsCard from './LogsCard';
 
 function MainGrid() {
   return (
     <Content style={styles.content}>
-      <PatchList />
       <Container style={styles.row}>
         <Card style={styles.card}>
           <ChartCard />
@@ -59,8 +57,8 @@ const styles = StyleSheet.create({
     paddingRight: 5
   },
   row: {
-    flexDirection: "row",
-    backgroundColor: "transparent",
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
     height: 240
   },
   card: {

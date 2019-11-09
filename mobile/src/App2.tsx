@@ -99,10 +99,9 @@ function BleListener() {
   React.useEffect(() => {
     setInterval(async () => {
       const values: { [key: string]: number[] } = await storage.getPayloads();
-      const data = Object.keys(values)
+      const data = (Object.keys(values)
         .sort()
-        .map(k => values[k])
-        .flat();
+        .map(k => values[k]) as any).flat();
 
       const user = store.getState().session.user;
       if (user && user.sub && user.jwt && deviceId) {

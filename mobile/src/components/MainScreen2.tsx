@@ -9,7 +9,7 @@ import { View, Text } from 'native-base';
 import { refresh } from '../store/session/actions';
 import { User } from '../store/session/types';
 import { firebase } from '@react-native-firebase/analytics';
-import { useQuery, useApolloClient } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 interface Props {
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const GET_VIEWER_QUERY = gql`
-  query GetViewer {
+  query GetViewer2 {
     viewer {
       username
       id

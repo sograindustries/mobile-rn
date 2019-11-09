@@ -19,6 +19,8 @@ function user(state: User | null = null, action: SessionAction) {
       return null;
     case 'ACTION_LOGOUT_SUCCESS':
       return null;
+    case 'ACTION_RESET_SESSION':
+      return null;
     default:
       return state;
   }
