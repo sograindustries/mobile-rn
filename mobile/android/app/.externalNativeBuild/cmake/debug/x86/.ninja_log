@@ -1,0 +1,25 @@
+# ninja log v5
+0	451	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+451	537	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+1	904	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+905	1204	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+8	1063	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1063	1341	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+3	1533	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1533	1856	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+1	1377	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1377	1714	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+2	759	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+759	1036	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+3	991	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+991	1138	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+0	1948	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1948	2204	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+3	943	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+943	1224	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+1	1221	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1221	1501	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+1	1125	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+1125	1412	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086
+1	2179	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	85606668799069ce
+2179	2501	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/x86/libnative-lib.so	d6de00dc33bcf086

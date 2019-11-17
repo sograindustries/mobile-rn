@@ -1,4 +1,5 @@
 import { action } from 'typesafe-actions';
+import { Mode } from '../../ble/service';
 
 export function scanStart() {
   return action('ACTION_SCAN_START');
@@ -16,8 +17,8 @@ export function connectStart() {
   return action('ACTION_CONNECT_START');
 }
 
-export function connectSuccess(deviceId: string) {
-  return action('ACTION_CONNECT_SUCCESS', deviceId);
+export function connectSuccess(deviceId: string, firmwareVersion: string) {
+  return action('ACTION_CONNECT_SUCCESS', { deviceId, firmwareVersion });
 }
 
 export function connectFailed() {
@@ -32,6 +33,18 @@ function setEcg(value: number) {
   return action('ACTION_SET_ECG', value);
 }
 
+export function setLed(id: number, isEnabled: boolean) {
+  return action('ACTION_SET_LED', { id, isEnabled });
+}
+
+export function setFiltering(isEnabled: boolean) {
+  return action('ACTION_SET_FILTERING', isEnabled);
+}
+
+export function setMode(mode: Mode) {
+  return action('ACTION_SET_HEART_MODE', mode);
+}
+
 export type BleAction = ReturnType<
   | typeof scanStart
   | typeof scanSuccess
@@ -41,4 +54,7 @@ export type BleAction = ReturnType<
   | typeof connectFailed
   | typeof disconnect
   | typeof setEcg
+  | typeof setLed
+  | typeof setFiltering
+  | typeof setMode
 >;

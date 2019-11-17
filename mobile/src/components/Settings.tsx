@@ -14,6 +14,9 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 import { setDeveloperMode, setSimulateFob } from '../store/settings/actions';
 import DeveloperOnly from './DeveloperOnly';
+import DeveloperSettingsLightsMenu from './DeveloperSettingsLightsMenu';
+import DeveloperSettingsHeartModeMenu from './DeveloperSettingsHeartModeMenu';
+import DeveloperSettingsEnterDFUMenu from './DeveloperSettingsEnterDFUMenu';
 
 interface Props {
   isDeveloperModeEnabled: boolean;
@@ -24,43 +27,49 @@ interface Props {
 
 function Settings(props: Props) {
   return (
-    <View style={{ backgroundColor: '#FFFFFF', marginTop: 40 }}>
-      <ListItem icon>
-        <Left>
-          <Button style={{ backgroundColor: '#FF9501' }}>
-            <Icon active name="bug" />
-          </Button>
-        </Left>
-        <Body>
-          <Text>Developer Mode</Text>
-        </Body>
-        <Right>
-          <Switch
-            value={props.isDeveloperModeEnabled}
-            onValueChange={props.onDeveloperModeValueChange}
-          />
-        </Right>
-      </ListItem>
-
-      <DeveloperOnly>
+    <>
+      <View style={{ backgroundColor: '#FFFFFF', marginTop: 40 }}>
         <ListItem icon>
           <Left>
-            <Button transparent>
-              <Icon active name="finger-print" />
+            <Button style={{ backgroundColor: '#FF9501' }}>
+              <Icon active name="bug" />
             </Button>
           </Left>
           <Body>
-            <Text>Simulate Fob</Text>
+            <Text>Developer Mode</Text>
           </Body>
           <Right>
             <Switch
-              value={props.simulateFob}
-              onValueChange={props.onSimulateFobValueChange}
+              value={props.isDeveloperModeEnabled}
+              onValueChange={props.onDeveloperModeValueChange}
             />
           </Right>
         </ListItem>
-      </DeveloperOnly>
-    </View>
+
+        <DeveloperOnly>
+          <ListItem icon>
+            <Left>
+              <Button transparent>
+                <Icon active name="finger-print" />
+              </Button>
+            </Left>
+            <Body>
+              <Text>Simulate Fob</Text>
+            </Body>
+            <Right>
+              <Switch
+                value={props.simulateFob}
+                onValueChange={props.onSimulateFobValueChange}
+              />
+            </Right>
+          </ListItem>
+        </DeveloperOnly>
+      </View>
+
+      <DeveloperSettingsHeartModeMenu />
+      <DeveloperSettingsLightsMenu />
+      <DeveloperSettingsEnterDFUMenu />
+    </>
   );
 }
 

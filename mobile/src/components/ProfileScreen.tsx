@@ -11,13 +11,14 @@ import {
   Right,
   Body
 } from 'native-base';
-import AppHeader from './AppHeader';
 import { User } from '../store/session/types';
 import { connect } from 'react-redux';
 import { AppState, AppDispatch } from '../store';
 import { logout } from '../store/session/actions';
 import { withApi, WithApiProps } from '../api/hoc';
 import Settings from './Settings';
+import { Platform } from 'react-native';
+import AppHeader from './AppHeader';
 
 interface Props {
   isAuthenticated: boolean;
@@ -31,7 +32,11 @@ const ProfileScreen = (props: Props) => {
     return <LoginScreen />;
   }
   return (
-    <Container style={{ backgroundColor: '#ecebf2' }}>
+    <Container
+      style={{
+        backgroundColor: '#ecebf2',
+        marginTop: Platform.OS === 'android' ? 20 : 0
+      }}>
       <AppHeader>
         <Title>Profile</Title>
       </AppHeader>

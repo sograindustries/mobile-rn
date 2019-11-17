@@ -22,7 +22,7 @@ function initializeStore(state?: AppState) {
   return createStore(
     rootReducer,
     state as any,
-    applyMiddleware(makePersistStateMiddleware(api), thunk)
+    applyMiddleware(thunk, makePersistStateMiddleware(api))
   );
 }
 

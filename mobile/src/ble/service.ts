@@ -5,6 +5,32 @@ import { decode as atob, encode as btoa } from 'base-64';
 
 const ARGOS_SERVICE_UUID = 'E4CC0001-2A2A-B481-E9A1-7185D4BC7DB6';
 
+export type Mode = 'ramp' | 'real_ADC' | 'arrhythmia' | 'constant';
+
+const clearMode = (cmd: any) => cmd & ~(1 << 1) & ~(1 << 2);
+const modeRamp = (cmd: any) => clearMode(cmd);
+const modeRealADC = (cmd: any) => clearMode(cmd) | (1 << 1);
+const modeArrhythmia = (cmd: any) => clearMode(cmd) | (1 << 2);
+const modeConstant = (cmd: any) => clearMode(cmd) | (1 << 1) | (1 << 2);
+
+const light0 = 1 << 3;
+const light1 = 1 << 4;
+const light2 = 1 << 5;
+const filterDisabled = 1 << 1;
+
+const lightOn = (cmd: any, light: any) => cmd | light;
+const lightOff = (cmd: any, light: any) => cmd & ~light;
+
+const disableFiltering = (cmd: any) => cmd | filterDisabled;
+const enableFiltering = (cmd: any) => cmd & ~filterDisabled;
+
+let command = modeRealADC(1);
+
+let prefix = '';
+export function setPrefix(value: string) {
+  prefix = value;
+}
+
 function makeScanFn(manager: BleManager) {
   return function scan() {
     return new Promise<Device>((res, rej) => {
@@ -98,6 +124,86 @@ function makeGetUptime(manager: BleManager) {
   };
 }
 
+function makeSetLEDFn(manager: BleManager) {
+  return async function setLED(
+    deviceId: string,
+    lightNumber: number,
+    isEnabled: boolean
+  ) {
+    const toggle = (light: any) =>
+      isEnabled ? lightOn(command, light) : lightOff(command, light);
+
+    switch (lightNumber) {
+      case 0:
+        command = toggle(light0);
+        break;
+      case 1:
+        command = toggle(light1);
+        break;
+      case 2:
+        command = toggle(light2);
+        break;
+    }
+
+    await manager.writeCharacteristicWithResponseForDevice(
+      deviceId,
+      ARGOS_SERVICE_UUID,
+      'E4CC0003-2A2A-B481-E9A1-7185D4BC7DB6'.toLowerCase(),
+      btoa(String.fromCharCode(...new Uint8Array([command, 0, 0, 0])))
+    );
+  };
+}
+
+function makeEnterDFUFn(manager: BleManager) {
+  return async function setLED(deviceId: string) {
+    await manager.writeCharacteristicWithResponseForDevice(
+      deviceId,
+      ARGOS_SERVICE_UUID,
+      'E4CC0003-2A2A-B481-E9A1-7185D4BC7DB6'.toLowerCase(),
+      btoa(String.fromCharCode(...new Uint8Array([command, 1, 0, 0])))
+    );
+  };
+}
+
+function makeSetModeFn(manager: BleManager) {
+  return async function setLED(deviceId: string, mode: Mode) {
+    switch (mode) {
+      case 'ramp':
+        command = modeRamp(command);
+        break;
+      case 'real_ADC':
+        command = modeRealADC(command);
+        break;
+      case 'arrhythmia':
+        command = modeArrhythmia(command);
+        break;
+      case 'constant':
+        command = modeConstant(command);
+        break;
+    }
+
+    await manager.writeCharacteristicWithResponseForDevice(
+      deviceId,
+      ARGOS_SERVICE_UUID,
+      'E4CC0003-2A2A-B481-E9A1-7185D4BC7DB6'.toLowerCase(),
+      btoa(String.fromCharCode(...new Uint8Array([command, 0, 0, 0])))
+    );
+  };
+}
+
+function makeSetFiltering(manager: BleManager) {
+  return async function setLED(deviceId: string, isEnabled: boolean) {
+    const filterBit = isEnabled ? enableFiltering(0) : disableFiltering(0);
+
+    await manager.writeCharacteristicWithResponseForDevice(
+      deviceId,
+      ARGOS_SERVICE_UUID,
+      'E4CC0003-2A2A-B481-E9A1-7185D4BC7DB6'.toLowerCase(),
+      btoa(String.fromCharCode(...new Uint8Array([command, filterBit, 0, 0])))
+    );
+  };
+}
+
 function makeListenFn(manager: BleManager) {
   return async function listen(deviceId: string) {
     try {
@@ -134,37 +240,42 @@ function makeListenFn(manager: BleManager) {
             return;
           }
 
-          const buf = new ArrayBuffer(120);
-          const arr = new Int32Array(buf);
           const value = Uint8Array.from(atob(char.value!), c =>
             c.charCodeAt(0)
           );
 
-          const buffer = Buffer.Buffer.from(value); //https://github.com/feross/buffer#convert-arraybuffer-to-buffer
+          const buffer = Buffer.Buffer.from(value);
 
-          for (let i = 0; i < buffer.length / 4; i += 1) {
-            const sensorData = buffer.readInt32LE(i * 4);
+          const packetCount = buffer.readInt32LE(0);
+          const status = buffer.readUInt8(4);
+
+          const arr = new Int32Array(new ArrayBuffer(120));
+          for (let i = 0; i < (buffer.length - 5) / 4; i += 1) {
+            const sensorData = buffer.readInt32LE(5 + i * 4);
             arr[i] = sensorData;
           }
 
           Object.values(onValueListeners).forEach(cb => {
             if (fob.shouldSimulateFob) {
               if (fob.leftFingerActive && fob.rightFingerActive) {
-                cb(deviceId, arr);
+                cb(deviceId, { packetCount, status, payload: arr, prefix });
               }
             } else {
-              cb(deviceId, arr);
+              cb(deviceId, { packetCount, status, payload: arr, prefix });
             }
           });
         }
       );
+
+      command = 1;
+      command = modeRealADC(command);
 
       logEvent('write_chars_start', {});
       await manager.writeCharacteristicWithResponseForDevice(
         deviceId,
         ARGOS_SERVICE_UUID,
         'E4CC0003-2A2A-B481-E9A1-7185D4BC7DB6'.toLowerCase(),
-        btoa(String.fromCharCode(...new Uint8Array([3, 0, 0, 0])))
+        btoa(String.fromCharCode(...new Uint8Array([command, 0, 0, 0])))
       );
       logEvent('write_chars_success', {});
     } catch (error) {
@@ -190,11 +301,23 @@ export function setRightFingerState(value: boolean) {
   fob.rightFingerActive = value;
 }
 
+export interface EcgMessage {
+  packetCount: number;
+  status: number;
+  payload: Int32Array;
+  prefix?: string;
+}
+
+let listenerIndex = 0;
 const onValueListeners: {
-  [key: string]: (deviceId: string, value: Int32Array) => void;
+  [key: string]: (deviceId: string, message: EcgMessage) => void;
 } = {};
-function addOnValueListener(cb: (deviceId: string, value: Int32Array) => void) {
-  const id = Object.keys(onValueListeners).length;
+function addOnValueListener(
+  cb: (deviceId: string, message: EcgMessage) => void
+) {
+  // TODO: make unique.
+  const id = listenerIndex;
+  listenerIndex += 1;
   onValueListeners[id] = cb;
   return function remove() {
     delete onValueListeners[id];
@@ -207,7 +330,10 @@ interface Callbacks {
   scanFailed: (error: any) => void;
 
   connectWillStart: () => void;
-  connectCompleted: (deviceId: string) => void;
+  connectCompleted: (deviceId: {
+    deviceId: string;
+    firmwareVersion: string;
+  }) => void;
   connectFailed: (error: any) => void;
 
   listenFailed: (error: any) => void;
@@ -238,8 +364,21 @@ export async function scanAndConnect(
 
   try {
     callbacks.connectWillStart();
-    await service.connect(deviceId);
-    callbacks.connectCompleted(deviceId);
+    let device = await service.connect(deviceId);
+    device = await device.discoverAllServicesAndCharacteristics();
+
+    const fwCommitHash = await device.readCharacteristicForService(
+      ARGOS_SERVICE_UUID,
+      'E4CC0004-2A2A-B481-E9A1-7185D4BC7DB6'.toLocaleLowerCase()
+    );
+    const firmwareVersion = fwCommitHash.value
+      ? atob(fwCommitHash.value)
+      : null;
+
+    callbacks.connectCompleted({
+      deviceId: device.id,
+      firmwareVersion: firmwareVersion || 'n/a'
+    });
 
     service.__manager.onStateChange(state => {
       console.log('STATE:', state);
@@ -299,6 +438,10 @@ export function makeService(manager: BleManager) {
     listen: makeListenFn(manager),
     getFWCommitHash: makeGetFWCommitHash(manager),
     getUptime: makeGetUptime(manager),
+    setLED: makeSetLEDFn(manager),
+    setFiltering: makeSetFiltering(manager),
+    setMode: makeSetModeFn(manager),
+    enterDFU: makeEnterDFUFn(manager),
     addOnValueListener,
     __manager: manager
   };

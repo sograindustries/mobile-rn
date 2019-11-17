@@ -112,15 +112,6 @@ function BleListener() {
       globalBuffer = [];
       globalBufferSize = 0;
     }, 15000);
-
-    defaultBleService.addOnValueListener(async (id, value) => {
-      deviceId = id;
-      globalBuffer = globalBuffer.concat([...value]);
-      globalBufferSize += 30;
-      if ((globalBufferSize / 30) % 10 === 0) {
-        storage.add(globalBuffer);
-      }
-    });
   });
 
   return <View />;

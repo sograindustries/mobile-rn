@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { BleAction } from './actions';
 import { BleStatus } from './types';
+import { Mode } from '../../ble/service';
 
 function peripherals(state: { id: string }[] = [], action: BleAction) {
   switch (action.type) {
@@ -76,6 +77,55 @@ function status(
 function deviceId(state: string | null = null, action: BleAction) {
   switch (action.type) {
     case 'ACTION_CONNECT_SUCCESS':
+      return action.payload.deviceId;
+    default:
+      return state;
+  }
+}
+
+function firmwareVersion(state: string | null = null, action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_CONNECT_SUCCESS':
+      return action.payload.firmwareVersion;
+    default:
+      return state;
+  }
+}
+
+function led1(state: boolean = false, action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_SET_LED':
+      if (action.payload.id === 1) {
+        return action.payload.isEnabled;
+      }
+    default:
+      return state;
+  }
+}
+
+function led2(state: boolean = false, action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_SET_LED':
+      if (action.payload.id === 2) {
+        return action.payload.isEnabled;
+      }
+    default:
+      return state;
+  }
+}
+
+function isFilteringEnabled(state: boolean = true, action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_SET_FILTERING':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function mode(state: Mode = 'real_ADC', action: BleAction) {
+  switch (action.type) {
+    case 'ACTION_SET_HEART_MODE':
       return action.payload;
     default:
       return state;
@@ -87,5 +137,10 @@ export const reducer = combineReducers({
   peripherals,
   ecg,
   ecgSet,
-  deviceId
+  deviceId,
+  firmwareVersion,
+  led1,
+  led2,
+  isFilteringEnabled,
+  mode
 });

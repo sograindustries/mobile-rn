@@ -1,0 +1,7 @@
+# ninja log v5
+0	1010	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fa94d353b300fc09
+1011	1271	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	cd889f9e4ae70904
+1	1249	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fa94d353b300fc09
+1249	1575	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	cd889f9e4ae70904
+1	1446	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fa94d353b300fc09
+1447	1788	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/armeabi-v7a/libnative-lib.so	cd889f9e4ae70904

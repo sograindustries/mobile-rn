@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import { EcgMessage } from '../../ble/service';
 
 var poolData = {
   UserPoolId: 'us-east-1_9vsr32SCz', // your user pool id here
@@ -7,7 +8,12 @@ var poolData = {
 
 export const makeEcgService = () => {
   return {
-    upload: (data: number[], sub: string, jwt: string, patchUuid: string) => {
+    upload: (
+      data: EcgMessage[],
+      sub: string,
+      jwt: string,
+      patchUuid: string
+    ) => {
       return new Promise<string>(async (res, rej) => {
         await AWS.config.update({
           ...AWS.config,
@@ -20,8 +26,15 @@ export const makeEcgService = () => {
           })
         });
 
-        //  const payload = pako.deflate(JSON.stringify(data), { to: 'string' });
-        const payload = JSON.stringify(data);
+        const latestPrefix = data[data.length - 1].prefix;
+
+        const payload = JSON.stringify(
+          data
+            .filter(msg => msg.prefix === latestPrefix)
+            .map(msg => {
+              return [msg.packetCount, msg.status, [...msg.payload]];
+            })
+        );
 
         const s3 = new AWS.S3({
           apiVersion: '2006-03-01'
@@ -29,7 +42,9 @@ export const makeEcgService = () => {
 
         var params = {
           Bucket: 'argos-ecgs',
-          Key: `${sub}/${patchUuid}/${new Date().toISOString()}.json`,
+          Key: `${
+            latestPrefix ? `${latestPrefix}-` : ''
+          }${sub}/${patchUuid}/${new Date().toISOString()}.json`,
           Body: payload
         };
 

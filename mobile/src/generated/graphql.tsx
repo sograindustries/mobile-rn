@@ -38,6 +38,12 @@ export type CreateReadingInput = {
   patchId?: Maybe<Scalars['Int']>,
   patchBleId?: Maybe<Scalars['ID']>,
   uri?: Maybe<Scalars['String']>,
+  /** Commit hash associated with FW build. */
+  firmwareVersion?: Maybe<Scalars['String']>,
+  /** Packet sequence number since device was last powered on. Reset to 0 when device is powered off. */
+  sequence?: Maybe<Scalars['Int']>,
+  /** Number of milliseconds patch has been on. */
+  uptimeMs?: Maybe<Scalars['Int']>,
 };
 
 export type CreateReadingPayload = {
@@ -100,6 +106,9 @@ export type Reading = {
   id: Scalars['Int'],
   createdAt?: Maybe<Scalars['String']>,
   uri?: Maybe<Scalars['String']>,
+  firmwareVersion?: Maybe<Scalars['String']>,
+  sequence?: Maybe<Scalars['Int']>,
+  uptimeMs?: Maybe<Scalars['Int']>,
 };
 
 /** Updates patch of provided ID. */

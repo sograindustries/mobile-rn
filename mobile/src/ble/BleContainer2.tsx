@@ -171,7 +171,7 @@ async function listen(manager: BleManager, id: string, logger: Logger) {
         }
 
         Object.values(onValueListeners).forEach(cb => {
-          cb(arr);
+          // cb(arr);
         });
       }
     );
@@ -296,25 +296,22 @@ function BleContainer(props: Props) {
   return <View />;
 }
 
-export default connect(
-  undefined,
-  dispatch => {
-    return {
-      onScanStart: () => {
-        dispatch(scanStart());
-      },
-      onScanError: () => {
-        dispatch(scanFailed());
-      },
-      onConnectStart: () => {
-        dispatch(connectStart());
-      },
-      onConnectSuccess: (deviceId: string) => {
-        dispatch(connectSuccess(deviceId));
-      },
-      onConnectError: () => {
-        dispatch(connectFailed());
-      }
-    };
-  }
-)(BleContainer);
+export default connect(undefined, dispatch => {
+  return {
+    onScanStart: () => {
+      dispatch(scanStart());
+    },
+    onScanError: () => {
+      dispatch(scanFailed());
+    },
+    onConnectStart: () => {
+      dispatch(connectStart());
+    },
+    onConnectSuccess: (deviceId: string) => {
+      dispatch(connectSuccess(deviceId));
+    },
+    onConnectError: () => {
+      dispatch(connectFailed());
+    }
+  };
+})(BleContainer);

@@ -3,7 +3,8 @@ import { View } from 'native-base';
 import {
   defaultService as bleService,
   scanAndConnect,
-  setShouldSimulateFob
+  setShouldSimulateFob,
+  EcgMessage
 } from '../ble/service';
 import { connect } from 'react-redux';
 import { logEvent } from '../logging';
@@ -22,41 +23,69 @@ import { useCreateReadingMutation } from '../generated/graphql';
 const LOG_KEY_BLE_CNOTAINER = 'ble_container';
 
 //let globalBufferSize = 0;
-let globalBuffer: number[] = [];
+let globalBuffer: EcgMessage[] = [];
 let bleId: string | null = null;
 
 interface BleListenerInnerProps {
   userSub: string | null;
   userJwt: string | null;
-  upload: () => Promise<string | null>;
+  upload: (ecgBuffer: EcgMessage[]) => Promise<string | null>;
 }
 
 function BleListenerInner(props: BleListenerInnerProps) {
   const [createReading] = useCreateReadingMutation();
 
   React.useEffect(() => {
-    bleService.addOnValueListener(async (id, value) => {
-      bleId = id;
-      globalBuffer = globalBuffer.concat([...value]);
-    });
+    const removeListener = bleService.addOnValueListener(
+      async (id, message) => {
+        bleId = id;
+        globalBuffer.push(message);
 
+        if (globalBuffer.length === 250) {
+          const copy = [...globalBuffer];
+          globalBuffer = [];
+          props.upload(copy).then(key => {
+            if (key) {
+              createReading({
+                variables: {
+                  input: {
+                    uri: key,
+                    patchBleId: bleId,
+                    firmwareVersion: 'n/a',
+                    sequence: -1,
+                    uptimeMs: -1
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
+    );
+
+    return removeListener;
+
+    /*
     setInterval(async () => {
       if (props.userSub && props.userJwt) {
         const key = await props.upload();
 
-        console.log('KEY!!!!', key);
         if (key) {
           createReading({
             variables: {
               input: {
                 uri: key,
-                patchBleId: bleId
+                patchBleId: bleId,
+                firmwareVersion: 'n/a',
+                sequence: -1,
+                uptimeMs: -1
               }
             }
           });
         }
       }
-    }, 10000);
+    }, 15000);
+    */
   }, []);
 
   return <View />;
@@ -86,7 +115,7 @@ const BleListener = withApi(
     },
     (dispatch: AppDispatch, ownProps: WithApiProps) => {
       return {
-        upload: () => {
+        upload: (ecgBuffer: EcgMessage[]) => {
           return (dispatch(async (_: any, getState: () => AppState) => {
             const state = getState();
             const user = state.session.user;
@@ -95,14 +124,14 @@ const BleListener = withApi(
             if (user && user.sub && user.jwt && bleId) {
               logEvent('payload_uploaded', {});
               key = await ownProps.api.ecg.upload(
-                globalBuffer,
+                ecgBuffer,
                 user.username,
                 user.jwt,
                 bleId
               );
             }
 
-            globalBuffer = [];
+            //globalBuffer = [];
             // globalBufferSize = 0;
 
             return key;
@@ -149,8 +178,8 @@ export default connect(
           dispatch(connectStart());
         },
 
-        connectCompleted: deviceId => {
-          dispatch(connectSuccess(deviceId));
+        connectCompleted: ({ deviceId, firmwareVersion }) => {
+          dispatch(connectSuccess(deviceId, firmwareVersion));
         },
 
         connectFailed: error => {

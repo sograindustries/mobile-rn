@@ -1,0 +1,7 @@
+# ninja log v5
+0	1351	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fc703994aa17c07a
+1352	1604	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86/libnative-lib.so	8b954ce6fe585b5a
+1	1311	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fc703994aa17c07a
+1311	1603	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86/libnative-lib.so	8b954ce6fe585b5a
+2	1879	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	fc703994aa17c07a
+1879	2199	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86/libnative-lib.so	8b954ce6fe585b5a
