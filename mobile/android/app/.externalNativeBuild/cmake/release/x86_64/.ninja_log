@@ -5,3 +5,7 @@
 1840	2222	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so	d36d60eb942abd07
 1	2147	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	c9af13ba3e76ed7a
 2147	2591	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so	d36d60eb942abd07
+1	297	0	CMakeFiles/native-lib.dir/kernels.cpp.o	18d90d1f0d682eda
+1	1457	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	c9af13ba3e76ed7a
+0	1627	0	CMakeFiles/native-lib.dir/estimate_hr.cpp.o	47bfb459dae2114b
+1627	1775	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so	8bcc84b294fc726e

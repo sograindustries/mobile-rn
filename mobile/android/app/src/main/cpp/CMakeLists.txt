@@ -8,6 +8,10 @@ cmake_minimum_required(VERSION 3.4.1)
 # The lib name in both places must match.
 add_library( native-lib
              SHARED
+             fir_filter.h
+             estimate_hr.h
+             estimate_hr.cpp
+             kernels.cpp
              native-lib.cpp )
 
 find_library(log-lib

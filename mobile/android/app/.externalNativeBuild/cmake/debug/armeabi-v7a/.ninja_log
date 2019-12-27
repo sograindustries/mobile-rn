@@ -23,3 +23,11 @@
 1220	1558	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	925c1ea60cd2825c
 3	2003	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	62418fa31d0d19f9
 2003	2439	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	925c1ea60cd2825c
+5	1180	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	62418fa31d0d19f9
+1180	1516	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	925c1ea60cd2825c
+3	80	0	CMakeFiles/native-lib.dir/kernels.cpp.o	ef3459acf3f69f09
+4	1523	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	62418fa31d0d19f9
+1523	1864	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	8f596bd41e110998
+3	850	0	CMakeFiles/native-lib.dir/native-lib.cpp.o	62418fa31d0d19f9
+3	947	0	CMakeFiles/native-lib.dir/estimate_hr.cpp.o	9637be61399588be
+947	1117	0	/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libnative-lib.so	13020e2861f2546b

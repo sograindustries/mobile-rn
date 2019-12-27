@@ -22,6 +22,18 @@
 				
 				{
 					"flags" : "  --target=armv7-none-linux-androideabi18 --gcc-toolchain=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dnative_lib_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/src/main/cpp/estimate_hr.cpp",
+					"workingDirectory" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi18 --gcc-toolchain=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dnative_lib_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/src/main/cpp/kernels.cpp",
+					"workingDirectory" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/.externalNativeBuild/cmake/debug/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi18 --gcc-toolchain=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/guilhermeguedes/Library/Android/ndk/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dnative_lib_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
 					"src" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/src/main/cpp/native-lib.cpp",
 					"workingDirectory" : "/Users/guilhermeguedes/Documents/dev/argosindustries/mobile-rn/mobile/android/app/.externalNativeBuild/cmake/debug/armeabi-v7a"
 				}
