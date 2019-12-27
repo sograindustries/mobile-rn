@@ -6,4 +6,4 @@ export const COLOR_RED = '#D32F2F';
 export const COLOR_BLUE = '#03A9F4';
 export const COLOR_WHITE = '#FFFFFF';
 
-export const COLOR_GREEN2 = '#5ed5b9';
+export const COLOR_GREEN2 = '#418107';

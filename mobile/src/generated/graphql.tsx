@@ -44,6 +44,8 @@ export type CreateReadingInput = {
   sequence?: Maybe<Scalars['Int']>,
   /** Number of milliseconds patch has been on. */
   uptimeMs?: Maybe<Scalars['Int']>,
+  /** Set of tags used to provide additional context to reading. */
+  tags?: Maybe<Array<Scalars['String']>>,
 };
 
 export type CreateReadingPayload = {
@@ -90,9 +92,16 @@ export type Patch = {
 
 export type Query = {
    __typename?: 'Query',
+  readings?: Maybe<Array<Maybe<Reading>>>,
   version?: Maybe<Scalars['String']>,
   user?: Maybe<User>,
   viewer?: Maybe<User>,
+};
+
+
+export type QueryReadingsArgs = {
+  patchId: Scalars['Int'],
+  start?: Maybe<Scalars['String']>
 };
 
 
@@ -109,6 +118,7 @@ export type Reading = {
   firmwareVersion?: Maybe<Scalars['String']>,
   sequence?: Maybe<Scalars['Int']>,
   uptimeMs?: Maybe<Scalars['Int']>,
+  tags?: Maybe<Array<Scalars['String']>>,
 };
 
 /** Updates patch of provided ID. */

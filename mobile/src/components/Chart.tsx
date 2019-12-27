@@ -2,7 +2,6 @@ import React from 'react';
 import { LineChart } from 'react-native-svg-charts';
 import { connect } from 'react-redux';
 import { AppState, AppDispatch } from '../store';
-import { COLOR_RED } from '../colors';
 import { defaultService as bleService } from '../ble/service';
 import { View, Button, Text } from 'native-base';
 import { WithBleProps, withBle } from '../ble/hoc';
@@ -32,7 +31,7 @@ const Chart = (_: Props) => {
       <LineChart
         style={{ height: 200 }}
         data={data}
-        svg={{ stroke: COLOR_RED, strokeWidth: 2 }}
+        svg={{ stroke: '#000000', strokeWidth: 2 }}
         contentInset={{ top: 20, bottom: 20 }}></LineChart>
       <View style={{ position: 'absolute', right: 0, bottom: 0 }}>
         <FilterButton />
@@ -63,7 +62,6 @@ function FilterButtonInner(props: FilterButtonProps) {
 const FilterButton = withBle(
   connect(
     (state: AppState) => {
-      console.log('FITERRRRR:', state.ble.isFilteringEnabled);
       return {
         isFilteringEnabled: state.ble.isFilteringEnabled
       };

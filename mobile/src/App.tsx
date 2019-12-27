@@ -37,8 +37,7 @@ async function init() {
 const cache = new InMemoryCache();
 const httpLink = createHttpLink({
   //uri: 'http://192.168.1.70:4000'
-  uri:
-    'https://9sqzy2t6ji.execute-api.us-east-1.amazonaws.com/production/graphql'
+  uri: 'https://api.argosheart.com/graphql',
 
   //'https://9sqzy2t6ji.execute-api.us-east-1.amazonaws.com/production/graphql'
 });
@@ -55,14 +54,14 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: user.jwt
-    }
+      authorization: user.jwt,
+    },
   };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache
+  cache,
 });
 
 interface InnerAppProps {
@@ -78,7 +77,7 @@ function InnerApp(props: InnerAppProps) {
   return <Viewer />;
 }
 const HydratedApp = connect((state: AppState) => ({
-  jwt: state.session.user ? state.session.user.jwt : null
+  jwt: state.session.user ? state.session.user.jwt : null,
 }))(InnerApp);
 
 function App() {

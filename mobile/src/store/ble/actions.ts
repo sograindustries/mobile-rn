@@ -45,6 +45,10 @@ export function setMode(mode: Mode) {
   return action('ACTION_SET_HEART_MODE', mode);
 }
 
+export function setReadingPrefix(prefix: string) {
+  return action('ACTION_SET_READING_PREFIX', prefix);
+}
+
 export type BleAction = ReturnType<
   | typeof scanStart
   | typeof scanSuccess
@@ -57,4 +61,5 @@ export type BleAction = ReturnType<
   | typeof setLed
   | typeof setFiltering
   | typeof setMode
+  | typeof setReadingPrefix
 >;

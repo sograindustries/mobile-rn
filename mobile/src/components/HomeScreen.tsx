@@ -9,7 +9,7 @@ import {
   Button
 } from 'native-base';
 import HeartChart from './HeartChart';
-import { COLOR_GREEN2 } from '../colors';
+import { COLOR_GREEN2, COLOR_GRAY } from '../colors';
 import { withNavigation, NavigationInjectedProps } from 'react-navigation';
 import { SCREEN_KEY_PROFILE } from './AppNavigator';
 import AppFooter from './AppFooter';
@@ -57,7 +57,7 @@ function AppHeaderInner(props: AppHeaderProps) {
     <Header transparent>
       <Right>
         <Button onPress={props.onProfilePress} transparent>
-          <Icon name="settings" style={{ fontSize: 32, color: COLOR_GREEN2 }} />
+          <Icon name="settings" style={{ fontSize: 32, color: COLOR_GRAY }} />
         </Button>
       </Right>
     </Header>

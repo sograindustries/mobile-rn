@@ -32,7 +32,7 @@ function HeartAnimation(props: Props & WithBleProps) {
   return (
     <View style={styles.body}>
       <Animatable.Text
-        animation={heartRate ? 'pulse' : undefined}
+        animation={heartRate ? 'pulse' : 'pulse'}
         easing="ease-out"
         iterationCount="infinite"
         style={{
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   heartIcon: {
-    fontSize: 120,
+    fontSize: 100,
     color: '#FE5F55'
   },
   bpmContainer: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    paddingBottom: 5
+    paddingBottom: 20
   },
   bpmValueText: {
     fontSize: 32,

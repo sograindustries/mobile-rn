@@ -4,7 +4,7 @@ import {
   defaultService as bleService,
   scanAndConnect,
   setShouldSimulateFob,
-  EcgMessage
+  EcgMessage,
 } from '../ble/service';
 import { connect } from 'react-redux';
 import { logEvent } from '../logging';
@@ -13,12 +13,13 @@ import {
   scanFailed,
   connectStart,
   connectSuccess,
-  connectFailed
+  connectFailed,
 } from '../store/ble/actions';
 import { AppState, AppDispatch } from '../store';
 import { withApi, WithApiProps } from '../api/hoc';
 import gql from 'graphql-tag';
 import { useCreateReadingMutation } from '../generated/graphql';
+import messaging from '@react-native-firebase/messaging';
 
 const LOG_KEY_BLE_CNOTAINER = 'ble_container';
 
@@ -29,6 +30,7 @@ let bleId: string | null = null;
 interface BleListenerInnerProps {
   userSub: string | null;
   userJwt: string | null;
+  prefix: string | null;
   upload: (ecgBuffer: EcgMessage[]) => Promise<string | null>;
 }
 
@@ -36,12 +38,18 @@ function BleListenerInner(props: BleListenerInnerProps) {
   const [createReading] = useCreateReadingMutation();
 
   React.useEffect(() => {
+    // Reset global buffer everytime this effect occurs.
+    globalBuffer = [];
+
     const removeListener = bleService.addOnValueListener(
       async (id, message) => {
         bleId = id;
         globalBuffer.push(message);
 
-        if (globalBuffer.length === 250) {
+        const prefix = props.prefix;
+        const tags = prefix ? [prefix] : [];
+
+        if (globalBuffer.length === 25) {
           const copy = [...globalBuffer];
           globalBuffer = [];
           props.upload(copy).then(key => {
@@ -52,10 +60,11 @@ function BleListenerInner(props: BleListenerInnerProps) {
                     uri: key,
                     patchBleId: bleId,
                     firmwareVersion: 'n/a',
+                    tags,
                     sequence: -1,
-                    uptimeMs: -1
-                  }
-                }
+                    uptimeMs: -1,
+                  },
+                },
               });
             }
           });
@@ -64,29 +73,7 @@ function BleListenerInner(props: BleListenerInnerProps) {
     );
 
     return removeListener;
-
-    /*
-    setInterval(async () => {
-      if (props.userSub && props.userJwt) {
-        const key = await props.upload();
-
-        if (key) {
-          createReading({
-            variables: {
-              input: {
-                uri: key,
-                patchBleId: bleId,
-                firmwareVersion: 'n/a',
-                sequence: -1,
-                uptimeMs: -1
-              }
-            }
-          });
-        }
-      }
-    }, 15000);
-    */
-  }, []);
+  }, [createReading, props, props.prefix]);
 
   return <View />;
 }
@@ -100,7 +87,7 @@ BleListenerInner.mutations = {
         }
       }
     }
-  `
+  `,
 };
 
 const BleListener = withApi(
@@ -110,7 +97,8 @@ const BleListener = withApi(
 
       return {
         userSub: user ? user.sub : null,
-        userJwt: user ? user.jwt : null
+        userJwt: user ? user.jwt : null,
+        prefix: state.ble.readingPrefix,
       };
     },
     (dispatch: AppDispatch, ownProps: WithApiProps) => {
@@ -122,6 +110,7 @@ const BleListener = withApi(
 
             let key: string | null = null;
             if (user && user.sub && user.jwt && bleId) {
+              console.log('JWT', user.jwt);
               logEvent('payload_uploaded', {});
               key = await ownProps.api.ecg.upload(
                 ecgBuffer,
@@ -131,12 +120,9 @@ const BleListener = withApi(
               );
             }
 
-            //globalBuffer = [];
-            // globalBufferSize = 0;
-
             return key;
           }) as unknown) as Promise<string | null>;
-        }
+        },
       };
     }
   )(BleListenerInner)
@@ -144,12 +130,44 @@ const BleListener = withApi(
 
 interface Props {
   onMount: () => void;
+  toggleLight: () => void;
 }
 
 function BleContainer(props: Props) {
   React.useEffect(() => {
     props.onMount();
-  }, []);
+  }, [props]);
+
+  React.useEffect(() => {
+    (async () => {
+      const enabled = await messaging().hasPermission();
+      if (enabled) {
+        const fcmToken = await messaging().getToken();
+        if (fcmToken) {
+          console.log('TOKEN: ', fcmToken);
+        } else {
+          console.log('NO TOKEN');
+          // user doesn't have a device token yet
+        }
+
+        console.log('REGISTERING CALLBACK');
+        messaging().onMessage(message => {
+          console.log('MESSAGE: ', message);
+          props.toggleLight();
+        });
+      } else {
+        console.log('DISABLED');
+        try {
+          await messaging().requestPermission();
+          console.log('GOT PERMISSIONS');
+          // User has authorised
+        } catch (error) {
+          console.log('ERROR GETTING PERMISSIONS.', error);
+          // User has rejected permissions
+        }
+      }
+    })();
+  }, [props]);
 
   return <BleListener />;
 }
@@ -160,7 +178,7 @@ export default connect(
 
     return {};
   },
-  dispatch => {
+  (dispatch: AppDispatch) => {
     const onMount = async () => {
       scanAndConnect(bleService, {
         scanWillStart: () => {
@@ -187,11 +205,19 @@ export default connect(
           logEvent(LOG_KEY_BLE_CNOTAINER, { message: `${error}` });
         },
 
-        listenFailed: () => {}
+        listenFailed: () => {},
       });
     };
     return {
-      onMount
+      onMount,
+      toggleLight: () => {
+        dispatch((_: AppDispatch, getState: () => AppState) => {
+          const deviceId = getState().ble.deviceId;
+          if (deviceId) {
+            bleService.setLED(deviceId, 1, true);
+          }
+        });
+      },
     };
   }
 )(BleContainer);

@@ -132,6 +132,18 @@ function mode(state: Mode = 'real_ADC', action: BleAction) {
   }
 }
 
+function readingPrefix(
+  state: string | null = null,
+  action: BleAction
+): string | null {
+  switch (action.type) {
+    case 'ACTION_SET_READING_PREFIX':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export const reducer = combineReducers({
   status,
   peripherals,
@@ -142,5 +154,6 @@ export const reducer = combineReducers({
   led1,
   led2,
   isFilteringEnabled,
-  mode
+  mode,
+  readingPrefix
 });
